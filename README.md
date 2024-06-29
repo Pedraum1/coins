@@ -4,7 +4,9 @@
  O Sistema consiste numa plataforma de gamificação para empresas e equipes que desenvolvam projetos e querem metrificar o redimento de seus membros. É inspirado em um sistema que ajudei a desenvolver na faculdade durante minha época atuando na Autotech EJ (Empresa Júnior).
  Alguns sitemas que podem ser destacados nesse projeto incluem:
  -CRUD
+ 
  -SISTEMA DE AUTENTICAÇÃO SIMPLES
+ 
  -SISTEMA DE AUTORIZAÇÃO
 
  A Plataforma é feita para três tipos de usuários:
