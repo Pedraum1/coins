@@ -9,8 +9,10 @@
 
  A Plataforma é feita para três tipos de usuários:
 
- MEMBROS: Usuários que querem acompanhar sua pontuação e o seu progresso na empresa.
- GERENTES: Usuários que estejam gerenciando projetos e tem autonomia para administrar a pontuação dos seus liderados.
- DIRETORES: Usuários que estejam no comando de setores inteiros e que estão liderando grande parte dos membros/gerentes da empresa.
+ -MEMBROS: Usuários que querem acompanhar sua pontuação e o seu progresso na empresa.
+ 
+ -GERENTES: Usuários que estejam gerenciando projetos e tem autonomia para administrar a pontuação dos seus liderados.
+ 
+ -DIRETORES: Usuários que estejam no comando de setores inteiros e que estão liderando grande parte dos membros/gerentes da empresa.
 
  
