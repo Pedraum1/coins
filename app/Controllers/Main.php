@@ -6,6 +6,7 @@ use App\Controllers\BaseController;
 use App\Models\CoinModel;
 use App\Models\UserModel;
 use CodeIgniter\HTTP\ResponseInterface;
+use CodeIgniter\I18n\Time;
 
 class Main extends BaseController
 {
@@ -42,5 +43,54 @@ class Main extends BaseController
         }
 
         return view('dashboard',$data);
+    }
+
+    public function coins($id){
+        $model = new UserModel();
+        $membro = $model->find($id);        
+
+        $model = new CoinModel();
+        $coins = $model->where('personal',$membro->name)->orderBy('updated_at','DESC')->findAll();
+
+        $data = [
+                 'membro' => $membro,
+                 'coins' => $coins,
+                ];
+
+        return view('adm/coins', $data);
+    }
+
+    public function coinSubmit(){
+
+        #COLETANDO INFORMAÇÕES DO FORMULÁRIO
+        $coinsInput = $this->request->getPost('coinInput');
+        $description = $this->request->getPost('descriptionInput');
+        $title = $this->request->getPost('titleInput');
+        $id = $this->request->getPost('idInput');
+
+        #MODELS
+        $coin_model = new CoinModel();
+        $user_model = new UserModel();
+
+        $personal = $user_model->find($id);//ENCONTRANDO MEMBRO
+        $coins = $coinsInput + $personal->coins;//TOTAL DE COINS DO MEMBRO
+
+        $new_coins = [
+                    'created_at'=>Time::now(),
+                    'updated_at'=>Time::now(),
+                    'title'=>$title,
+                    'personal'=>$personal->name,
+                    'description'=>$description,
+                    'coins'=>$coinsInput
+                    ];
+
+        $coins_update = ['coins' => $coins];
+
+        #INSERÇÃO NA BASE DE DADOS
+        $coin_model->insert($new_coins);
+        $user_model->update($id, $coins_update);
+        
+        #RETORNANDO PARA O DASHBOARD
+        return redirect()->to('/dashboard');
     }
 }

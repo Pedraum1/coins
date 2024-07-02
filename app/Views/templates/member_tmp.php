@@ -28,11 +28,11 @@
 <body class="poppins-regular">
 
   <!--PRE-LOADER-->
-  <div id="loader" class="col-6 loader"style=" background-color: white;">
+  <div id="loader" class="col-6 loader" style=" background-color: white;">
     <div class="inner"></div>
   </div>
 
-  <!--PAGE CONTENT-->  
+  <!--PAGE CONTENT-->
 
   <div class="bg-secondary body">
     <?= $this->renderSection('content') ?>

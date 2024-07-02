@@ -12,7 +12,7 @@ class CoinModel extends Model
     protected $returnType       = 'object';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = [];
+    protected $allowedFields    = ['created_at','updated_at','deleted_at','title','personal','description','coins'];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;
