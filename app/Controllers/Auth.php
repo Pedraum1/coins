@@ -3,12 +3,13 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Models\CoinModel;
 use App\Models\UserModel;
 use CodeIgniter\HTTP\ResponseInterface;
 
 class Auth extends BaseController
 {
-    public function index()//TELA DE LOGIN
+    public function index() //TELA DE LOGIN
     {
         $data['erro'] = session()->getFlashdata('erro');
         #VERIFICANDO SE HÁ ERROS DE LOGIN PRÉVIOS
@@ -17,37 +18,50 @@ class Auth extends BaseController
         #RETORNANDO VIEW DE LOGIN
     }
 
-    public function submit(){//VALIDAÇÃO DE LOGIN
+    public function submit()
+    { //VALIDAÇÃO DE LOGIN
 
         $email = $this->request->getPost('email');
         $senha = $this->request->getPost('senha');
         #COLETANDO INFORMAÇÕES DO FORM DE LOGIN
-        
+
         $user_model = new UserModel();
         #MODEL DE USUÁRIOS
 
-        $usuario = $user_model->verify_login($email,$senha);
+        $usuario = $user_model->verify_login($email, $senha);
         #VERIFICANDO EXISTÊNCIA DE USUÁRIO
-        if(!$usuario){
-            return redirect()->back()->withInput()->with('erro','Erro, verifique seu Email e/ou Senha') ;
+        if (!$usuario) {
+            return redirect()->back()->withInput()->with('erro', 'Erro, verifique seu Email e/ou Senha');
             #RETORNANDO EM CASO DE ERRO
         }
 
+        $coin_model = new CoinModel();
+        $coins = $coin_model->where('personal', $usuario->name)->findAll();
+        $somatorio = 0;
+        foreach ($coins as $coin) {
+            $somatorio = $somatorio + $coin->coins;
+        }
+        $data = ['coins' => $somatorio];
+        $user_model->update($usuario->id, $data);
+
+        $usuario = $user_model->where('email',$email)->first();
+
         $data_session = [ //INFORMAÇÕES DE LOGIN
             'id' => $usuario->id,
-            'nome'=>$usuario->name,
-            'cargo'=>$usuario->role,
-            'coins'=>$usuario->coins,
-            'imagem'=>$usuario->profile,
-            'acesso'=>$usuario->access
+            'nome' => $usuario->name,
+            'cargo' => $usuario->role,
+            'coins' => $usuario->coins,
+            'imagem' => $usuario->profile,
+            'acesso' => $usuario->access
         ];
-        session()->set($data_session);//INICIANDO SESSÃO DE LOGIN
+        session()->set($data_session); //INICIANDO SESSÃO DE LOGIN
 
         return redirect()->to('/dashboard');
         #RETORNANDO VIEW DE DASHBOARD        
     }
 
-    public function logout(){//LOGOUT
+    public function logout()
+    { //LOGOUT
 
         session()->destroy();
         #ENCERRANDO SESSÃO DE LOGIN
