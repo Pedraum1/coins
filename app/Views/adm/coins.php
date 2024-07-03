@@ -51,8 +51,8 @@
             <td><?= $coin->title ?></td>
             <td><?= $coin->coins ?></td>
             <td>
-              <a class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
-              <a class="btn btn-warning"><i class="fa-solid fa-pen" style="color: #FFF;"></i></a>
+              <a href="/dashboard/coins/delete/<?= $coin->id ?>" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
+              <a href="/dashboard/coins/update/<?= $membro->id?>/<?= $coin->id ?>" class="btn btn-warning"><i class="fa-solid fa-pen" style="color: #FFF;"></i></a>
             </td>
           </tr>
           <?php endforeach; ?>
