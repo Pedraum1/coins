@@ -16,6 +16,9 @@ $routes->group('/dashboard/', ['filter' => 'auth'], function ($routes) { //AGRUP
 
   $routes->get('', 'Main::index');       //DASHBOARD/PÁGINA INICIAL
   $routes->get('search', 'Main::index'); //PESQUISA DE MEMBRO
+  $routes->get('edit/role/(:num)','Main::editRole/$1'); //EDITAR CARGO E ACESSO DO MEMBRO
+  $routes->post('edit/roleSubmit','Main::roleSubmit');  //CONTROLLER PARA VALIDAÇÃO
+  $routes->get('delete/(:num)','Main::deleteMember/$1');//CONTROLLER DELETAR MEMBRO
 
   #ROTAS CRUD
   $routes->group('coins/', ['filter' => 'access'], function ($routes) {

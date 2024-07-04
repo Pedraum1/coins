@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\CoinModel;
+use App\Models\RoleModel;
 use App\Models\UserModel;
 use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\I18n\Time;
@@ -172,6 +173,58 @@ class Main extends BaseController
         #ATUALIZANDO BASE DE DADOS
         $coin_model->delete($id_coin);//DELETANDO COIN
         $user_model->update($id_user,$data);//REDUZINDO COINS DO MEMBRO
+    public function editRole($id)
+    {
+        $user_model = new UserModel();
+        $role_model = new RoleModel();
+        $user = $user_model->find($id);
+        $roles = $role_model->orderBy('role', 'ASC')->findAll();
+        $data = ['membro' => $user, 'roles' => $roles];
+
+        return view('adm/edit_role', $data);
+    }
+
+    public function roleSubmit()
+    {
+        $id = $this->request->getPost('idInput');
+        $role_input = $this->request->getPost('roleInput');
+        $newRole = $this->request->getPost('newRoleInput');
+        $access = $this->request->getPost('accessInput');
+
+        $user_model = new UserModel();
+        $role_model = new RoleModel();
+
+        $role = $role_model->find($role_input);
+
+        if (!empty($newRole)) {
+            $role_model = new RoleModel();
+            $data_role = ['role' => $newRole];
+            $role_model->insert($data_role);
+
+            $data = [
+                'role' => $newRole,
+                'access' => $access
+            ];
+        } else if(!empty($role_input)) {
+            $data = [
+                'role' => $role->role,
+                'access' => $access
+            ];
+        } else {
+            $data = [
+                'access' => $access
+            ];
+        }
+
+        $user_model->update($id, $data);
+
+        return redirect()->to('/dashboard');
+    }
+
+    public function deleteMember($id){
+        $user_model = new UserModel();
+
+        $user_model->delete($id);
 
         return redirect()->back();
     }
