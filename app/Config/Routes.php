@@ -23,6 +23,6 @@ $routes->group('/dashboard/', ['filter' => 'auth'], function ($routes) { //AGRUP
     $routes->post('submit', 'Main::coinSubmit');                      //MODIFICAR COINS DO MEMBRO
     $routes->get('update/(:num)/(:num)', 'Main::update/$1/$2');       //VIEW ATUALIZAR COINS
     $routes->post('updateSubmit', 'Main::updateSubmit');              //ATUALIZAR COINS
-    $routes->get('delete/(:num)', 'Main::delete/$1');                 //DELETAR COINS
+    $routes->get('delete/(:num)/(:num)', 'Main::delete/$1/$2');                 //DELETAR COINS
   });
 });

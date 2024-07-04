@@ -158,4 +158,21 @@ class Main extends BaseController
 
         return redirect()->to('/dashboard');
     }
+
+    public function delete($id_coin,$id_user){
+        #MODELS
+        $coin_model = new CoinModel();
+        $user_model = new UserModel();
+        #COIN E USUÁRIO
+        $coin = $coin_model->find($id_coin);
+        $user = $user_model->find($id_user);
+
+        $data = ['coins'=> $user->coins - $coin->coins];
+
+        #ATUALIZANDO BASE DE DADOS
+        $coin_model->delete($id_coin);//DELETANDO COIN
+        $user_model->update($id_user,$data);//REDUZINDO COINS DO MEMBRO
+
+        return redirect()->back();
+    }
 }

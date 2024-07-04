@@ -13,12 +13,6 @@
       <?php if (!empty($membros)) : ?>
         <div class="row align-items-center mb-3">
 
-          <div class="col-md-3">
-            <a href="dashboard/add" class="btn btn-secondary">
-              Adicionar membro
-            </a>
-          </div>
-
           <div class="col-md-5">
             <?= form_open('/dashboard/search') ?>
             <div class="input-group">
@@ -49,7 +43,7 @@
                 <td><?= $membro->name ?></td>
                 <td>
                   <?= $membro->role ?>
-                  <a href="dashboard/edit/role" class="btn btn-warning">
+                  <a href="dashboard/edit/role/<?= $membro->id ?>" class="btn btn-warning">
                     <i class="fa-solid fa-pen" style="color: #FFF;"></i>
                   </a>
                 </td>
