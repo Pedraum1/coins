@@ -12,7 +12,7 @@
 
     <h1><?= $membro->name ?>: <?= $membro->coins ?> coins</h1>
 
-    <input type="hidden" name="idInput" value="<?= $membro->id ?>">
+    <input type="hidden" name="idInput" value="<?= encrypt($membro->id) ?>">
     <div class="col-4">
       <div>
         <label for="coinInput" class="form-label">Adicionar coins</label>
@@ -51,8 +51,8 @@
             <td><?= $coin->title ?></td>
             <td><?= $coin->coins ?></td>
             <td>
-              <a href="/dashboard/coins/delete/<?= $coin->id ?>/<?= $membro->id ?>" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
-              <a href="/dashboard/coins/update/<?= $membro->id?>/<?= $coin->id ?>" class="btn btn-warning"><i class="fa-solid fa-pen" style="color: #FFF;"></i></a>
+              <a href="/dashboard/coins/delete/<?= encrypt($coin->id) ?>/<?= encrypt($membro->id) ?>" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
+              <a href="/dashboard/coins/update/<?= encrypt($membro->id)?>/<?= encrypt($coin->id) ?>" class="btn btn-warning"><i class="fa-solid fa-pen" style="color: #FFF;"></i></a>
             </td>
           </tr>
           <?php endforeach; ?>

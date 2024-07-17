@@ -11,7 +11,7 @@ class CreateTestLogins extends Seeder
     {
         $this->db->table('users')->insert([
             'created_at'=>Time::now(),          
-            'email'=>'pedrom249@gmail.com',
+            'email'=>'pedro@gmail.com',
             'senha'=>'Pedro123',
             'name'=>'Pedro Paulo',
             'role'=>'Diretor de Projetos',

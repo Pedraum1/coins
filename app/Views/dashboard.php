@@ -43,7 +43,7 @@
                 <td><?= $membro->name ?></td>
                 <td>
                   <?= $membro->role ?>
-                  <a href="dashboard/edit/role/<?= $membro->id ?>" class="btn btn-warning">
+                  <a href="dashboard/edit/role/<?= encrypt($membro->id) ?>" class="btn btn-warning">
                     <i class="fa-solid fa-pen" style="color: #FFF;"></i>
                   </a>
                 </td>
@@ -51,9 +51,9 @@
                 <td>
                   <div class="btn-group" role="group" aria-label="Basic mixed styles example">
                     <?php if(session()->acesso == 2): ?>
-                      <a href="dashboard/delete/<?= $membro->id ?>" type="button" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
+                      <a href="dashboard/delete/<?= encrypt($membro->id) ?>" type="button" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
                     <?php endif; ?>
-                    <a href="dashboard/coins/<?= $membro->id ?>" type="button" class="btn btn-success"><i class="fa-solid fa-coins"></i></a>
+                    <a href="dashboard/coins/<?= encrypt($membro->id) ?>" type="button" class="btn btn-success"><i class="fa-solid fa-coins"></i></a>
                   </div>
                 </td>
               </tr>

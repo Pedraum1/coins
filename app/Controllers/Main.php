@@ -51,6 +51,7 @@ class Main extends BaseController
 
     public function coins($id)
     {
+        $id = decrypt($id);
 
         #MODELS
         $user_model = new UserModel();
@@ -77,7 +78,7 @@ class Main extends BaseController
         $coinsInput = $this->request->getPost('coinInput');
         $description = $this->request->getPost('descriptionInput');
         $title = $this->request->getPost('titleInput');
-        $id = $this->request->getPost('idInput');
+        $id = decrypt($this->request->getPost('idInput'));
 
         #MODELS
         $coin_model = new CoinModel();
@@ -107,6 +108,9 @@ class Main extends BaseController
 
     public function update($id_membro, $id_coin)
     {
+        $id_membro = decrypt($id_membro);
+        $id_coin = decrypt($id_coin);
+        
         $coin_model = new CoinModel();
         $user_model = new UserModel();
         $membro = $user_model->find($id_membro);
@@ -166,6 +170,8 @@ class Main extends BaseController
 
     public function delete($id_coin, $id_user)
     {
+        $id_coin = decrypt($id_coin);
+        $id_user = decrypt($id_user);
         #MODELS
         $coin_model = new CoinModel();
         $user_model = new UserModel();
@@ -184,6 +190,8 @@ class Main extends BaseController
 
     public function editRole($id)
     {
+        $id = decrypt($id);
+
         $user_model = new UserModel();
         $role_model = new RoleModel();
         $user = $user_model->find($id);
@@ -195,7 +203,7 @@ class Main extends BaseController
 
     public function roleSubmit()
     {
-        $id = $this->request->getPost('idInput');
+        $id = decrypt($this->request->getPost('idInput'));
         $role_input = $this->request->getPost('roleInput');
         $newRole = $this->request->getPost('newRoleInput');
         $access = $this->request->getPost('accessInput');
@@ -231,6 +239,8 @@ class Main extends BaseController
     }
 
     public function deleteMember($id){
+        $id = decrypt($id);
+
         $user_model = new UserModel();
 
         $user_model->delete($id);

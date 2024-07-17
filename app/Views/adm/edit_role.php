@@ -12,7 +12,7 @@
 
     <h1>Atualizar cargo: <?= $membro->name ?></h1>
 
-    <input type="hidden" name="idInput" value="<?= $membro->id ?>">
+    <input type="hidden" name="idInput" value="<?= encrypt($membro->id) ?>">
 
     <div class="col-4">
       <div>
